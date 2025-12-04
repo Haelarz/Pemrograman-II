@@ -29,7 +29,7 @@ public class PenjualanDaoImpl implements PenjualanDao{
 
     @Override
     public void deletePenjualan(int id) throws Exception {
-        String sql = "DELETE FROM penjualan WHERE id=?";
+        String sql = "DELETE FROM penjualan WHERE penjualan_id=?";
         try (Connection conn = DatabaseHelper.getConnection();
              PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setInt(1, id);
@@ -42,15 +42,15 @@ public class PenjualanDaoImpl implements PenjualanDao{
         List<Penjualan> list = new ArrayList<>();
         String sql = "SELECT p.*, pel.nama AS nama_pelanggan, b.judul AS judul_buku " +
                      "FROM penjualan p " +
-                     "JOIN pelanggan pel ON p.pelanggan_id = pel.id " +
-                     "JOIN buku b ON p.buku_id = b.id";
+                     "JOIN pelanggan pel ON p.pelanggan_id = pel.pelanggan_id " +
+                     "JOIN buku b ON p.buku_id = b.buku_id";
                      
         try (Connection conn = DatabaseHelper.getConnection();
              Statement stmt = conn.createStatement();
              ResultSet rs = stmt.executeQuery(sql)) {
             while (rs.next()) {
                 list.add(new Penjualan(
-                    rs.getInt("id"),
+                    rs.getInt("penjualan_id"),
                     rs.getInt("jumlah"),
                     rs.getInt("total_harga"),
                     rs.getDate("tanggal").toLocalDate(), 

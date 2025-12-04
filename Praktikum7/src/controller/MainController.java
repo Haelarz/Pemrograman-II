@@ -198,7 +198,8 @@ public class MainController {
     }
     private void loadDataBuku() {
         try { tblBuku.setItems(FXCollections.observableArrayList(bukuService.getAllBuku())); } 
-        catch (Exception e) { e.printStackTrace(); }
+        catch (Exception e) { showAlert("Gagal Memuat Data", "Error Database: " + e.getMessage());
+        e.printStackTrace(); }
     }
     private void loadDataPenjualan() {
         try { tblPenjualan.setItems(FXCollections.observableArrayList(penjualanService.getAllPenjualan())); } 

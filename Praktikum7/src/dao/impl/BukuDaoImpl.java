@@ -27,7 +27,7 @@ public class BukuDaoImpl implements BukuDao{
 
     @Override
     public void editBuku(Buku b) throws Exception {
-        String sql = "UPDATE buku SET judul=?, penulis=?, harga=?, stok=? WHERE id=?";
+        String sql = "UPDATE buku SET judul=?, penulis=?, harga=?, stok=? WHERE buku_id=?";
         try (Connection conn = DatabaseHelper.getConnection();
              PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setString(1, b.getJudul());
@@ -41,7 +41,7 @@ public class BukuDaoImpl implements BukuDao{
 
     @Override
     public void deleteBuku(int id) throws Exception {
-        String sql = "DELETE FROM buku WHERE id=?";
+        String sql = "DELETE FROM buku WHERE buku_id=?";
         try (Connection conn = DatabaseHelper.getConnection();
              PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setInt(1, id);
@@ -58,7 +58,7 @@ public class BukuDaoImpl implements BukuDao{
              ResultSet rs = stmt.executeQuery(sql)) {
             while (rs.next()) {
                 list.add(new Buku(
-                    rs.getInt("id"),
+                    rs.getInt("buku_id"),
                     rs.getString("judul"),
                     rs.getString("penulis"),
                     rs.getInt("harga"),

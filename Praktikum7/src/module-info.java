@@ -4,6 +4,9 @@ module Praktikum7 {
     requires javafx.fxml;
     requires javafx.graphics;
     requires java.sql;        // Untuk koneksi database (JDBC)
+    
+    // WAJIB ADA DUA INI UNTUK DATABASE:
+    requires mysql.connector.j;
 
     // 2. Buka akses paket agar bisa dibaca oleh JavaFX (untuk FXML & Controller)
     opens application to javafx.graphics, javafx.fxml;

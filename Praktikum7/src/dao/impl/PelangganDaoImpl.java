@@ -26,7 +26,7 @@ public class PelangganDaoImpl implements PelangganDao {
 
     @Override
     public void editPelanggan(Pelanggan p) throws Exception {
-        String sql = "UPDATE pelanggan SET nama=?, email=?, telepon=? WHERE id=?";
+        String sql = "UPDATE pelanggan SET nama=?, email=?, telepon=? WHERE pelanggan_id=?";
         try (Connection conn = DatabaseHelper.getConnection();
              PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setString(1, p.getNama());
@@ -39,7 +39,7 @@ public class PelangganDaoImpl implements PelangganDao {
 
     @Override
     public void deletePelanggan(int id) throws Exception {
-        String sql = "DELETE FROM pelanggan WHERE id=?";
+        String sql = "DELETE FROM pelanggan WHERE pelanggan_id=?";
         try (Connection conn = DatabaseHelper.getConnection();
              PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setInt(1, id);
@@ -56,7 +56,7 @@ public class PelangganDaoImpl implements PelangganDao {
              ResultSet rs = stmt.executeQuery(sql)) {
             while (rs.next()) {
                 list.add(new Pelanggan(
-                    rs.getInt("id"),
+                    rs.getInt("pelanggan_id"),
                     rs.getString("nama"),
                     rs.getString("email"),
                     rs.getString("telepon")

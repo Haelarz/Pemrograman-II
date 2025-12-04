@@ -7,7 +7,6 @@ import dao.impl.PelangganDaoImpl;
 import model.Pelanggan;
 
 public class PelangganService {
-	// Menghubungkan Service ke DAO
     private final PelangganDao dao = new PelangganDaoImpl();
 
     public List<Pelanggan> getAllPelanggan() throws Exception {
@@ -30,7 +29,6 @@ public class PelangganService {
         dao.deletePelanggan(id);
     }
 
-    // Logika Validasi Input
     private void validasi(Pelanggan p) throws Exception {
         if (p.getNama() == null || p.getNama().trim().isEmpty()) {
             throw new Exception("Nama Pelanggan wajib diisi!");
@@ -41,7 +39,6 @@ public class PelangganService {
         if (p.getTelepon() == null || p.getTelepon().trim().isEmpty()) {
             throw new Exception("Nomor Telepon wajib diisi!");
         }
-        // Validasi format telepon (hanya angka)
         if (!p.getTelepon().matches("\\d+")) {
             throw new Exception("Nomor Telepon harus berupa angka!");
         }
